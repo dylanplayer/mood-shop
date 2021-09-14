@@ -10,16 +10,20 @@ for(let i = 0; i < data.length; i += 1){
     const img = document.createElement("img");
 
     img.src = data[i].image;
-    img.width = 300;
-    img.height = 300;
-
     newDiv.appendChild(img);
 
+    const name = document.createElement("h5");
+    name.className = "name";
+    name.innerText = data[i].name;
+    newDiv.appendChild(name);
+
     const description = document.createElement("p");
+    description.className = "description";
     description.innerText = data[i].desc;
     newDiv.appendChild(description);
 
     const price = document.createElement("p");
+    price.className = "price";
     price.innerText = data[i].price;
     newDiv.appendChild(price);
 

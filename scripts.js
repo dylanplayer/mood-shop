@@ -3,6 +3,7 @@ import data from './data.js';
 const itemsContainer = document.querySelector("#items");
 
 let cart = [];
+
 function addItem(){
 
     cart.push(data[this.id-1]);
@@ -11,7 +12,19 @@ function addItem(){
 
 function showCart(){
 
-    console.log(cart)
+    var total = 0;
+    var count = 0;
+
+    console.log("------------ Cart ------------");
+    for(var i = 0; i < cart.length; i++){
+
+        console.log(`Name: ${cart[i].name} Price ${cart[i].price}`);
+        total += cart[i].price;
+        count++;
+
+    }
+    console.log(`Total: ${total} Quantity: ${count}`);
+    console.log("------------------------------");
 
 }
 

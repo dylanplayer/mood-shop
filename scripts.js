@@ -74,14 +74,34 @@ function showCart(){
 
         const price = document.createElement("p");
         price.className = "price";
-        price.innerText = cart[i].price;
+        price.innerText = "$" + cart[i].price;
         newDiv.appendChild(price);
 
-        const qty = document.createElement("p");
-        qty.className = "qty";
-        qty.innerText = cart[i].qty;
-        newDiv.appendChild(qty);
+        const dropdown = document.createElement("select");
+        dropdown.className = "qty-dropdown";
 
+        for(var j = cart[i].qty; j > 0; j--){
+
+            const qty1 = document.createElement("option");
+            qty1.className = "qty";
+            qty1.innerText = cart[i].qty - j;
+            dropdown.appendChild(qty1);
+
+        }
+
+        const qty = document.createElement("option");
+        qty.className = "qty";
+        qty.selected = "selected";
+        qty.innerText = cart[i].qty;
+        dropdown.appendChild(qty);
+
+        
+        const qty1 = document.createElement("option");
+        qty1.className = "qty";
+        qty1.innerText = cart[i].qty + 1;
+        dropdown.appendChild(qty1);
+
+        newDiv.appendChild(dropdown);
         cartContainer.appendChild(newDiv);
 
     }
@@ -113,7 +133,7 @@ for(let i = 0; i < data.length; i += 1){
     
     const price = document.createElement("p");
     price.className = "price";
-    price.innerText = data[i].price;
+    price.innerText = "$" + data[i].price;
     newDiv.appendChild(price);
     
     const button = document.createElement("button");

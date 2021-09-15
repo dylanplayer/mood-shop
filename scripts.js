@@ -57,6 +57,8 @@ function addItem(){
 
     }
 
+    window.location = "#cart";
+
     showCart();
 
 }

@@ -10,9 +10,9 @@ cartUpdateButton.onclick = updateCart;
 
 function updateCart(){
 
-    for(var i = 0; i < cart.length; i++){
+    for(let i = 0; i < cart.length; i++){
 
-        var selector = document.getElementById(`qty-dropdown-${cart[i].id}`);
+        let selector = document.getElementById(`qty-dropdown-${cart[i].id}`);
         cart[i].qty = parseInt(selector.value);
         if(cart[i].qty == 0){
 
@@ -28,9 +28,9 @@ function updateCart(){
 
 function addItem(){
     
-    var existsInCart = false;
-    var loctionOfCurrentItem = 0;
-    for(var i = 0; i < cart.length; i++){
+    let existsInCart = false;
+    let loctionOfCurrentItem = 0;
+    for(let i = 0; i < cart.length; i++){
 
         if(cart[i].id == this.id){
 
@@ -68,11 +68,11 @@ function showCart(){
     cartContainer.querySelectorAll('*').forEach(item => item.remove());
 
     if(cart.length > 0){
-        var total = 0;
-        var count = 0;
+        let total = 0;
+        let count = 0;
 
         console.log("------------ Cart ------------");
-        for(var i = 0; i < cart.length; i++){
+        for(let i = 0; i < cart.length; i++){
 
             console.log(`Name: ${cart[i].name} Price ${cart[i].price} Qty: ${cart[i].qty}`);
             count += cart[i].qty;
@@ -87,7 +87,7 @@ function showCart(){
         totalText.innerText = `Total: ${total.toFixed(2)}`;
         cartContainer.appendChild(totalText);
 
-        for(var i = 0; i < cart.length; i++){
+        for(let i = 0; i < cart.length; i++){
 
             const newDiv = document.createElement("div");
             newDiv.className = "cart-item";
@@ -111,7 +111,7 @@ function showCart(){
             dropdown.id = `qty-dropdown-${cart[i].id}`;
             dropdown.onchange = updateCart;
 
-            for(var j = cart[i].qty; j > 0; j--){
+            for(let j = cart[i].qty; j > 0; j--){
 
                 const qty1 = document.createElement("option");
                 qty1.className = "qty";
@@ -128,7 +128,7 @@ function showCart(){
             qty.value = cart[i].qty;
             dropdown.appendChild(qty);
 
-            for(var j = 1; j < 4; j++){
+            for(let j = 1; j < 4; j++){
 
                 const qty1 = document.createElement("option");
                 qty1.className = "qty";

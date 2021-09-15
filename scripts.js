@@ -109,6 +109,7 @@ function showCart(){
             const dropdown = document.createElement("select");
             dropdown.className = "qty-dropdown";
             dropdown.id = `qty-dropdown-${cart[i].id}`;
+            dropdown.onchange = updateCart;
 
             for(var j = cart[i].qty; j > 0; j--){
 

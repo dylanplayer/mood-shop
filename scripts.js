@@ -5,6 +5,27 @@ const cartContainer = document.querySelector("#cart");
 
 let cart = [];
 
+const cartUpdateButton = document.querySelector("#cart-update-button");
+cartUpdateButton.onclick = updateCart;
+
+function updateCart(){
+
+    for(var i = 0; i < cart.length; i++){
+
+        var selector = document.getElementById(`qty-dropdown-${cart[i].id}`);
+        cart[i].qty = parseInt(selector.value);
+        if(cart[i].qty == 0){
+
+            cart.pop(i);
+
+        }
+
+    }
+
+    showCart();
+
+}
+
 function addItem(){
     
     var existsInCart = false;
@@ -44,66 +65,87 @@ function showCart(){
 
     cartContainer.querySelectorAll('*').forEach(item => item.remove());
 
-    var total = 0;
-    var count = 0;
+    if(cart.length > 0){
+        var total = 0;
+        var count = 0;
 
-    console.log("------------ Cart ------------");
-    for(var i = 0; i < cart.length; i++){
+        console.log("------------ Cart ------------");
+        for(var i = 0; i < cart.length; i++){
 
-        console.log(`Name: ${cart[i].name} Price ${cart[i].price} Qty: ${cart[i].qty}`);
-        total += cart[i].price;
-        count += cart[i].qty;
-
-    }
-    console.log(`Total: ${total} Quantity: ${count}`);
-    console.log("------------------------------");
-
-    for(var i = 0; i < cart.length; i++){
-
-        const newDiv = document.createElement("div");
-        newDiv.className = "cart-item";
-
-        const img = document.createElement("img");
-        img.src = cart[i].image;
-        newDiv.appendChild(img);
-
-        const name = document.createElement("h5");
-        name.className = "name";
-        name.innerText = cart[i].name;
-        newDiv.appendChild(name);
-
-        const price = document.createElement("p");
-        price.className = "price";
-        price.innerText = "$" + cart[i].price;
-        newDiv.appendChild(price);
-
-        const dropdown = document.createElement("select");
-        dropdown.className = "qty-dropdown";
-
-        for(var j = cart[i].qty; j > 0; j--){
-
-            const qty1 = document.createElement("option");
-            qty1.className = "qty";
-            qty1.innerText = cart[i].qty - j;
-            dropdown.appendChild(qty1);
+            console.log(`Name: ${cart[i].name} Price ${cart[i].price} Qty: ${cart[i].qty}`);
+            count += cart[i].qty;
+            total += cart[i].price * cart[i].qty;
 
         }
+        console.log(`Total: ${total} Quantity: ${count}`);
+        console.log("------------------------------");
 
-        const qty = document.createElement("option");
-        qty.className = "qty";
-        qty.selected = "selected";
-        qty.innerText = cart[i].qty;
-        dropdown.appendChild(qty);
+        const totalText = document.createElement("h4");
+        totalText.className = "cart-total";
+        totalText.innerText = `Total: ${total.toFixed(2)}`;
+        cartContainer.appendChild(totalText);
 
+        for(var i = 0; i < cart.length; i++){
+
+            const newDiv = document.createElement("div");
+            newDiv.className = "cart-item";
+
+            const img = document.createElement("img");
+            img.src = cart[i].image;
+            newDiv.appendChild(img);
+
+            const name = document.createElement("h5");
+            name.className = "name";
+            name.innerText = cart[i].name;
+            newDiv.appendChild(name);
+
+            const price = document.createElement("p");
+            price.className = "price";
+            price.innerText = "$" + cart[i].price;
+            newDiv.appendChild(price);
+
+            const dropdown = document.createElement("select");
+            dropdown.className = "qty-dropdown";
+            dropdown.id = `qty-dropdown-${cart[i].id}`;
+
+            for(var j = cart[i].qty; j > 0; j--){
+
+                const qty1 = document.createElement("option");
+                qty1.className = "qty";
+                qty1.value = cart[i].qty - j;
+                qty1.innerText = cart[i].qty - j;
+                dropdown.appendChild(qty1);
+
+            }
+
+            const qty = document.createElement("option");
+            qty.className = "qty";
+            qty.selected = "selected";
+            qty.innerText = cart[i].qty;
+            qty.value = cart[i].qty;
+            dropdown.appendChild(qty);
+
+            for(var j = 1; j < 4; j++){
+
+                const qty1 = document.createElement("option");
+                qty1.className = "qty";
+                qty1.innerText = cart[i].qty + j;
+                qty1.value =  cart[i].qty + j;
+                dropdown.appendChild(qty1);
+
+            }
+
+            newDiv.appendChild(dropdown);
+            cartContainer.appendChild(newDiv);
+
+        }
+    }else{
+
+        const totalText = document.createElement("h4");
+        totalText.className = "cart-total";
+        totalText.innerText = `Cart is empty`;
+        cartContainer.appendChild(totalText);
         
-        const qty1 = document.createElement("option");
-        qty1.className = "qty";
-        qty1.innerText = cart[i].qty + 1;
-        dropdown.appendChild(qty1);
-
-        newDiv.appendChild(dropdown);
-        cartContainer.appendChild(newDiv);
-
     }
 
 }

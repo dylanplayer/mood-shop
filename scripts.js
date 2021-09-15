@@ -16,7 +16,7 @@ function updateCart(){
         cart[i].qty = parseInt(selector.value);
         if(cart[i].qty == 0){
 
-            cart.pop(i);
+            cart.splice(i, 1);
 
         }
 

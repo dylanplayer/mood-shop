@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body{
@@ -22,6 +23,8 @@ body{
     justify-content: space-between;
     background-color: #F8F0DF;
     color: #79B4B7;
+    padding-left: 30px;
+    padding-right: 30px;
 
 }
 
@@ -68,7 +71,7 @@ body{
 
     display: grid;
     width: 90%;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, 300px);
     grid-gap: 1em;
     text-align: center;
     margin: auto;
